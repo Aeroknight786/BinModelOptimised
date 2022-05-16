@@ -24,7 +24,7 @@ def binomial_tree(K,T,So,r,N,u,d,opttype = 'C'):
   discount = np.exp(-r * dt)        #Discounting the Expected Pay-Offs when exercised.
 ```
 
-We define and empty array to fill with the spot price values on the terminal exercise date. We back calculate from the lowest possible value by multiplying the UpMove and dividing by DownMove at each step. This helps us iterate through all the possible terminal values considering all paths stemming from the binomial distribution. We then calculate the boundary conditions on the terminal date by calculating max(0, S[j] - K) where K is the strike price and S is the precalculated terminal spot price.
+We define and empty array to fill with the spot price values on the terminal exercise date. We back calculate from the lowest possible value by multiplying the UpMove and dividing by DownMove at each step. This helps us iterate through all the ponsible terminal values considering all paths stemming from the binomial distribution. We then calculate the boundary conditions on the terminal date by calculating max(0, S[j] - K) where K is the strike price and S is the precalculated terminal spot price.
 
 ```python
   #Initialise Asset Prices, Time Step N
@@ -39,7 +39,7 @@ We define and empty array to fill with the spot price values on the terminal exe
     C[j] = max(0, S[j] - K)
 
 ```
-
+In this section, we iterate across the nodes of the tree in order to calculate the risk neutral option premium at time T = 0. 2 for-loops are used for this process, the first one being an iterator from the last time step layer(N) to the 0th time step. The second for-loop iterates from the lowest valued node of layer i, to the highest valued node according to the binomial path. Every layer i contains (i+1) nodes. Hence we calculate the value of C[j] using C[j] and C[j+1]. For example, in a 2 period binomial model, C[1,0] = func(C[2,0], C[2,1]). This means that when we update the value of C[0] it remains unchanged for the rest of the iteration along the nodes of layer[1]. When calculating C[0,0], we use C[1,0] and C[1,1]. The terminal value of the option is C[0] at the end of all iterations. 
 
 ```python
   #Step backwards through Tree
@@ -52,4 +52,5 @@ We define and empty array to fill with the spot price values on the terminal exe
 binomial_tree(K,T,So,r,N,u,d,opttype = 'C')
 ```
 ```
+We can see that this particular algorithm has On^2 complexity and for recommended accuracy levels, we'd have trouble with the amount of computing time, consumed for each set of parameters. Hence, we need to optimise the process by using numpy vectors as at the vectorised level, we can compute much faster for higher values of N.
 ```
