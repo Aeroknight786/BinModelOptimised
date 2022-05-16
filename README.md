@@ -68,10 +68,10 @@ Finally for iterating across and computing the value of the nodes, we use only o
   return C[0]
 binomial_tree_vectorised(K,T,So,r,N,u,d,opttype = 'C')
 ```
-We've prepared this code in order to perform properly for a Vanilla Call option, and on plotting for increasing values of time steps, we see that it converges. Here the value of U and D remains constant even though we are increasing the number of time steps. This however is incorrect as according to a Cox, Ross and Rubenstein initialisation, we will have U = e^(sigma * sqrt(T)). Initialisation will be coverd shortly.
+We've prepared this code in order to perform properly for a Vanilla Call option, and on plotting for increasing values of time steps, we see that it converges. Here the value of U and D remains constant even though we are increasing the number of time steps. This however is incorrect as according to a Cox, Ross and Rubenstein initialisation, we will have U = e^(sigma * sqrt(T)). Initialisation will be covered shortly.
 
 
-                    ![image](https://user-images.githubusercontent.com/51220035/168601635-a0f21b78-1522-41c5-8631-f47e5a8d9cbb.png)
+![image](https://user-images.githubusercontent.com/51220035/168601635-a0f21b78-1522-41c5-8631-f47e5a8d9cbb.png)
 
 
 
