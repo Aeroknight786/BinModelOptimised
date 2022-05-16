@@ -60,7 +60,11 @@ Here we used numpy vectors to quicky calculate the values of the terminal spot p
   #Initialise Option Values
   C = np.maximum(S - K, np.zeros(N+1))
 ```
-
+Finally for iterating across and computing the value of the nodes, we use only one for-loop to iterate through the layers, while we use two shifted subsets of the Node Vectors to quickly compute the values of nodes on the preceding layer.
 ```python
-
+#Step backwards through Tree
+  for i in np.arange(N,0,-1):
+    C = discount * (q * C[1:i+1] + (1 - q) * C[0:i])
+  return C[0]
+binomial_tree_vectorised(K,T,So,r,N,u,d,opttype = 'C')
 ```
