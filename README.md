@@ -41,7 +41,7 @@ We define and empty array to fill with the spot price values on the terminal exe
 ```
 In this section, we iterate across the nodes of the tree in order to calculate the risk neutral option premium at time T = 0. 2 for-loops are used for this process, the first one being an iterator from the last time step layer(N) to the 0th time step. The second for-loop iterates from the lowest valued node of layer i, to the highest valued node according to the binomial path. Every layer i contains (i+1) nodes. Hence we calculate the value of C[j] using C[j] and C[j+1]. For example, in a 2 period binomial model, C[1,0] = func(C[2,0], C[2,1]). This means that when we update the value of C[0] it remains unchanged for the rest of the iteration along the nodes of layer[1]. When calculating C[0,0], we use C[1,0] and C[1,1]. The terminal value of the option is C[0] at the end of all iterations. 
 
-```
+```python
   #Step backwards through Tree
   for i in np.arange(N,0,-1):
     for j in range(0,i):
@@ -50,7 +50,7 @@ In this section, we iterate across the nodes of the tree in order to calculate t
   return C[0]
 
 binomial_tree(K,T,So,r,N,u,d,opttype = 'C')
-```python
+```
 We can see that this particular algorithm has On^2 complexity and for recommended accuracy levels, we'd have trouble with the amount of computing time, consumed for each set of parameters. Hence, we need to optimise the process by using numpy vectors as at the vectorised level, we can compute much faster for higher values of N.
 
 ```
