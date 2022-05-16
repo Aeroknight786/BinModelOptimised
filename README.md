@@ -52,7 +52,15 @@ In this section, we iterate across the nodes of the tree in order to calculate t
 binomial_tree(K,T,So,r,N,u,d,opttype = 'C')
 ```
 We can see that this particular algorithm has On^2 complexity and for recommended accuracy levels, we'd have trouble with the amount of computing time, consumed for each set of parameters. Hence, we need to optimise the process by using numpy vectors as at the vectorised level, we can compute much faster for higher values of N.
+Here we used numpy vectors to quicky calculate the values of the terminal spot prices and option payoffs at expiry instead of two separate for-loops.
+```python
+  #Initialise Option Values at Maturity
+  S = So * d** (np.arange(N,-1,-1)) * u **(np.arange(0,N+1,1))
 
+  #Initialise Option Values
+  C = np.maximum(S - K, np.zeros(N+1))
 ```
+
+```python
 
 ```
