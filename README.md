@@ -68,3 +68,10 @@ Finally for iterating across and computing the value of the nodes, we use only o
   return C[0]
 binomial_tree_vectorised(K,T,So,r,N,u,d,opttype = 'C')
 ```
+We've prepared this code in order to perform properly for a Vanilla Call option, and on plotting for increasing values of time steps, we see that it converges. Here the value of U and D remains constant even though we are increasing
+![image](https://user-images.githubusercontent.com/51220035/168600395-78614113-cfc2-4723-8a87-8de6ddc297d6.png)
+
+
+
+```
+```
