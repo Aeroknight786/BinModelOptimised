@@ -84,6 +84,13 @@ We have also not added functionality in our code for valuing Put Options. We add
       C[j] = max(0, K - S[j])
 ```
 
+Until now, we have prepared a function capable of valuing European Options exclusively; options that can be exercised on the terminal date only. However American Options are also widely traded and this model is capable of computing options with such payoffs. Whenever we compute the value of a node in the tree, we treat that node as if we have an option to exercise it at that moment in time. We have a price for the premium required to be paid and a possible payoff for the same on the basis of the paths possible from that particular node. The payoff for exercising it at that moment(+/-|S-K|) can be compared with the payoff if we held the option going ahead. We treat every node as if it is the first node and we compare the payoff of holding against that of exercising. We implement the same in the following section using 2 for-loops.
 
 ```python
+      if opttype == 'P':
+        C[j] = max(C[j], K - S)
+      else:
+        C[j] = max(C[j], S - K)
+
+  return C[0]
 ```
