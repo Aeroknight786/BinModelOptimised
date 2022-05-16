@@ -93,7 +93,7 @@ Until now, we have prepared a function capable of valuing European Options exclu
       #Here we calculate Spot Prices for each individual layer again so we can recompute payoff.
       C[j] = discount * (q * C[j+1] + (1 - q) * C[j])
       
-      After computing payoffs from future nodes, we compare against payoff for immediate exercise.
+      #After computing payoffs from future nodes, we compare against payoff for immediate exercise.
       if opttype == 'P':
         C[j] = max(C[j], K - S)
       else:
