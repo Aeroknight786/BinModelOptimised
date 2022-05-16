@@ -68,13 +68,22 @@ Finally for iterating across and computing the value of the nodes, we use only o
   return C[0]
 binomial_tree_vectorised(K,T,So,r,N,u,d,opttype = 'C')
 ```
-We've prepared this code in order to perform properly for a Vanilla Call option, and on plotting for increasing values of time steps, we see that it converges. Here the value of U and D remains constant even though we are increasing the number of time steps. This however is incorrect as according to a Cox, Ross and Rubenstein initialisation, we will have U = e^(sigma * sqrt(T)). Initialisation will be covered shortly.
+We've prepared this code in order to perform properly for a Vanilla Call option, and on plotting for increasing values of time steps, we see that it converges but also increases by a few orders which is inaccurate. Here, in the implementation the value of U and D remains constant even though we are increasing the number of time steps. This however is incorrect as according to a Cox, Ross and Rubenstein initialisation, we will have U = e^(sigma * sqrt(T)). Initialisation will be covered shortly.
 
 
 ![image](https://user-images.githubusercontent.com/51220035/168601635-a0f21b78-1522-41c5-8631-f47e5a8d9cbb.png)
 
+We have also not added functionality in our code for valuing Put Options. We add the following changes to our previous code in order to make the code more robust to the type of option fed as a parameter. The sole change is during the initialisation of the terminal payoffs, and we add a conditional statement to deal with the same.
 
-
-
+```python
+  C = np.zeros(N+1)
+  for j in range(0,N+1):
+    if (opttype == 'C'):
+      C[j] = max(0, S[j] - K)
+    else:
+      C[j] = max(0, K - S[j])
 ```
+
+
+```python
 ```
