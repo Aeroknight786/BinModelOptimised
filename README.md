@@ -1,5 +1,5 @@
 # Binomial Option Pricing in Python
-We here implement a binomial option pricing model derived under risk neutral no-arbitrage conditions based on Chapter 10 (Options, Futures and Other Derivatives, John.C.Hull). First we price a vanilla call option using two implementation methods, one using basic for-loops to traverse the tree and a optimal vectorised technique for more efficiency. Firstly, we define the input parameters.
+We here implement a binomial option pricing model derived under risk neutral no-arbitrage conditions based on Chapter 10 (Options, Futures and Other Derivatives, John.C.Hull) and the Binomal Option pricing playlist by ASX Portfolio YT. First we price a vanilla call option using two implementation methods, one using basic for-loops to traverse the tree and a optimal vectorised technique for more efficiency. Firstly, we define the input parameters.
 ```python
 #Initialising Parameters:
 
