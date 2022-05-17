@@ -166,3 +166,5 @@ def CRR_Method(K,T,So,r,N,sigma,opttype = 'C'):
   q = (np.exp(r * dt) - d)/(u - d)  #Risk Neutral Formula
   discount = np.exp(-r * dt)        #Discounting the Expected Pay-Offs when exercised.
 ```
+We now finally calculate U and D based on the Jarrow and Rudd method that equates the Expectation Value of Return against the Mean drift term of the GBM Process and the Expected Variance against the Volatility term of the GBM. We get a risk neutral probability = 1/2 in this case. The implementation is as follows.
+![image](https://user-images.githubusercontent.com/51220035/168925983-47a10b3f-f88b-4143-83b7-463ead610c20.png)
