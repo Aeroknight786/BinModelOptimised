@@ -117,4 +117,38 @@ Now, we move on to a faster NumPy optimised implementation. Spot price and Payof
 
   return C[0]
 ```
+We also add implementations for valuing Barrier Options, in this case, an up-and-out Put Barrier Option. The changes made are essentially another filter on the Terminal Payoff to replace the payoffs beyond the spot price barrier by zero. We also need to calculate whether the barrier is exceeded by the spot price at every node, due to which there is a necessity to compute the spot price for every layer.
 
+```python
+  #Check Terminal Condition PayOff 
+  for j in range(0,N+1):
+    S = So * (u**j) * (d**(N-j))
+    if S>=H:
+      C[j] = 0
+
+  #Backward Iteration Through the Tree
+  for i in np.arange(N-1, -1,-1):
+    for j in range(0,i+1):
+      S = So* (u**j) * (d**(i-j))
+      if S >= H:
+        C[j] = 0
+      else:
+        C[j] = discount * (q*C[j+1] + (1-q)*C[j])
+  
+  return C[0]
+```
+
+Similar to the optimized implementation of the American Option Binomial Tree, the code now uses another conditional statement after the value of the node is computed to reduce the value of the payoff to 0 at those indices where [S >= H] as defined by the barrier function. 
+```python
+  #Check Terminal Condition PayOff
+  C[S >= H ] = 0
+
+  #Backward Recursion through the Tree
+  for i in np.arange(N-1, -1, -1):
+    S = So* (u**(np.arange(0,i+1,1))) * (d**(np.arange(i,-1,-1)))
+    C[:i+1] = discount * (q * C[1:i+2] + (1-q) * C[0:i+1])
+    C = C[:-1]
+    C[S >= H] = 0
+  
+  return C[0]
+```
