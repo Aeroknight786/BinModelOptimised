@@ -101,3 +101,20 @@ Until now, we have prepared a function capable of valuing European Options exclu
 
   return C[0]
 ```
+Now, we move on to a faster NumPy optimised implementation. Spot price and Payoffs need to computed at each step as we have to find if exercise is optimal at that time step. As we have to start iterating from the second-last layer and each layer and (i+1) number of nodes, we have the range for i beginning from N-1. The truncation of the payoff vector C is done so it can be readily be compared with the spot price vector that is recalculated at every layer iteration.
+
+```python
+  for i in np.arange(N-1,-1,-1):
+    S = So* (u**(np.arange(0,i+1,1))) * (d**(np.arange(i,-1,-1)))
+    C[:i+1] = discount * (q * C[1:i+2] + (1-q) * C[0:i+1])
+    C = C[:-1]          # We truncate the last value as the spot price vector needs to be the same size as the payoff vector.
+    
+    
+    if opttype == 'P':
+      C = np.maximum(C, K - S)
+    else:
+      C = np.maximum(C, S - K)
+
+  return C[0]
+```
+
