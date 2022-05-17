@@ -168,3 +168,14 @@ def CRR_Method(K,T,So,r,N,sigma,opttype = 'C'):
 ```
 We now finally calculate U and D based on the Jarrow and Rudd method that equates the Expectation Value of Return against the Mean drift term of the GBM Process and the Expected Variance against the Volatility term of the GBM. We get a risk neutral probability = 1/2 in this case. The implementation is as follows.
 ![image](https://user-images.githubusercontent.com/51220035/168925983-47a10b3f-f88b-4143-83b7-463ead610c20.png)
+
+```python
+def JR_Method(K,T,So,r,N,sigma,opttype = 'C'):
+  #Pre-Computing Constants
+  dt = T/N
+  nu = r - 0.5*sigma**2
+  u = np.exp(nu*dt + sigma*np.sqrt(dt))
+  d = np.exp(nu*dt - sigma*np.sqrt(dt))
+  q = 0.5
+  discount = np.exp(-r * dt)        #Discounting the Expected Pay-Offs when exercised.
+```
