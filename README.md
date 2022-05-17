@@ -153,7 +153,9 @@ Similar to the optimized implementation of the American Option Binomial Tree, th
   return C[0]
 ```
 Until now, the value of u and d used was arbitrary and did not take into account the size of the time step or the volatility of the underlying, both important factors in traditional models such as the BSM model. We explore two models here, the first one being the Cox, Ross and Rubinstein model that prepares a recombining tree whose values are derived by using the formula of expectation return value of the tree and equating against the variance in the time step of the underlying's GBM. The changes included in the beginning of the function are:
-![image](https://user-images.githubusercontent.com/51220035/168925046-2114cb1a-253d-401f-80d6-65bb01de415c.png)
+![image](https://user-images.githubusercontent.com/51220035/168925196-725013dc-9040-4824-ad94-6398a4b95796.png)
+![image](https://user-images.githubusercontent.com/51220035/168925213-8f797414-ccbd-417b-b3c2-61a65f759fc8.png)
+
 
 ```python
 def CRR_Method(K,T,So,r,N,sigma,opttype = 'C'):
